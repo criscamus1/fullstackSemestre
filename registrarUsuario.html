@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <style src="assets/style.css"></style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">Tienda virtual</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="">Nosostros</a>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="blogs.html">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="contactos.html">Contactos</a>
+        </li>
+    </div>
+  </div>
+</nav>
+<div class="nav-item">
+    <a class="nav-link active" aria-current="page" href="iniciarSesion.html">¿Ya tienes un usuario?</a>
+  </div>
+<h1 class="container text-center">Registrar en /Inserte nombre de empresa\</h1>
+<form class="container text-center">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre Completo</label>
+    <input type="text" class="form-control" id="nombre" >
+  </div>
+  <div class="mb-3">
+    <label for="correo" class="form-label">Correo electrónico</label>
+    <input type="email" class="form-control" id="correo" >
+  </div>
+  <div class="mb-3">
+    <label for="confirmar-correo" class="form-label">Confirmar Correo</label>
+    <input type="email" class="form-control" id="confcorreo" >
+    <span class="error" id="error-correo"></span>
+  </div>
+  <div class="mb-3">
+    <label for="contraseña" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" id="contrasena" >
+  </div>
+  <div class="mb-3">
+    <label for="confirmar-contraseña" class="form-label">Confirmar Contraseña</label>
+    <input type="password" class="form-control" id="confcontrasena" >
+    <span class="error" id="error-contrasena"></span>
+  </div>
+  <div class="mb-3">
+    <label for="telefono" class="form-label">telefono</label>
+    <input type="text" class="form-control" id="telefono" >
+  </div>
+  <div class="row">
+    <div class="col 4">
+  <select class="form-select" aria-label="Default select example">
+  <option selected>Region</option>
+  <option value="1">Metropolitana</option>
+  <option value="2">Arica</option>
+  <option value="3">Antofagasta</option>
+  <option value="4">Araucanía</option>
+  <option value="5">Ñuble</option>
+  <option value="6"></option>
+  <option value="7"></option>
+  <option value="8"></option>
+  <option value="9"></option>
+  <option value="10"></option>
+  <option value="11"></option>
+  <option value="12"></option>
+  <option value="13"></option>
+  <option value="14"></option>
+  <option value="15"></option>
+  <option value="16"></option>
+</select>
+</div>
+<div class="col 6">
+<select class="form-select" aria-label="Default select example">
+  <option selected>Comuna</option>
+  <option value="1">La Florida</option>
+  <option value="2">Maipu</option>
+  <option value="3"></option>
+</select>
+</div>
+</div>
+<br>
+   <button type="button"  class="btn btn-primary text-center" onclick="registrar()">Registrar</button>
+</form>
+<script>
+    function registrar() {
+        const correo= document.getElementById("correo").value;
+        const confcorreo= document.getElementById("confcorreo").value;
+        const contrasena= document.getElementById("contrasena").value;
+        const confcontrasena= document.getElementById("confcontrasena").value;
+        const nombre= document.getElementById("nombre").value;
+        const telefono= document.getElementById("telefono").value;
+        if(correo!==confcorreo){
+          error("El Correo no es el mismo")
+          return;
+        }
+        if(contrasena!==confcontrasena){
+          error("La contraseña no es la misma")
+          return;
+        }
+        console.log(correo===confcorreo)
+        console.log(contrasena===confcontrasena)
+        console.log(nombre)
+        console.log(telefono)
+        window.location.href="inicio.html";
+    }
+</script>
+</body>
+</html>
