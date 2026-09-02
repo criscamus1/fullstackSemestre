@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "nombre": "Crimson Desert",
+        "precio": 34990,
+        "plataforma": "PC/Consola",
+        "estrellas": "★★★★⯨",
+        "imagen": "steam/crimson.jpg",
+        "descripcion": "Crimson Desert es un juego de acción y aventura."
+    }
+]
