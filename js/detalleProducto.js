@@ -12,3 +12,33 @@ const productosData = [
   { id: 11, nombre: "ELDEN RING Tarnished Edition", plataforma: "PC/Consola", precio: 34990, estrellas: "★★★★⯨", imagen: "nintendo/elden.jpg", descripcion: "Un vasto mundo de fantasía oscura creado junto a George R. R. Martin." },
   { id: 12, nombre: "Resident Evil Requiem", plataforma: "PC/Consola", precio: 44990, estrellas: "★★★★⯨", imagen: "nintendo/re9.jpg", descripcion: "La nueva entrega de terror y survival horror de Capcom." }
 ];
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("detalle-producto");
+  if (!contenedor) return; // esta página no tiene el div de detalle, no hace nada
+
+  const params = new URLSearchParams(window.location.search);
+  const id = Number(params.get("id"));
+  const producto = productosData.find((p) => p.id === id);
+
+  if (!producto) {
+    contenedor.innerHTML = `<p>No se encontró el producto solicitado.</p>`;
+    return;
+  }
+  const precioFormateado = producto.precio.toLocaleString("es-CL");
+
+  contenedor.innerHTML = `
+    <div class="detalle-grid">
+      <div class="detalle-imagen">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+      </div>
+      <div class="detalle-info">
+        <span class="etiqueta-plataforma">${producto.plataforma}</span>
+        <h2>${producto.nombre}</h2>
+        <p class="estrellas">${producto.estrellas}</p>
+        <p class="detalle-descripcion">${producto.descripcion}</p>
+        <p class="precio-detalle">$${precioFormateado}</p>
+        <button class="btn-comprar" type="button">Comprar ahora</button>
+      </div>
+    </div>
+  `;
+});
