@@ -38,33 +38,37 @@
     <img src="img/shoopingcart.jpg" alt="..." width="64" height="64">0</a>
   </div>
 </nav>
-<h1>Blogs</h1>
- <div class="container text-center">
- <div class="container">
-  <div class="row">
-    <div class="col-9">Caso 1#</div>
-    <div class="col-4">/descripcion\
-      <br><button type="button" class="btn btn-primary" style="background-color: black;">Ver caso</button>
-    </div>
-    <div class="col-6"><img src="..." alt="imagen referencia">
-  </div>
-  <div class="row">
-    <div class="col-9">Caso 2#</div>
-    <div class="col-4">/descripcion\
-      <br><button type="button" class="btn btn-primary" style="background-color: black;">Ver caso</button>
-    </div>
-    <div class="col-6"><img src="..." alt="imagen referencia">
-  </div>
-  <div class="row">
-    <div class="col-9">Caso 3#</div>
-    <div class="col-4">/descripcion\
-      <br><button type="button" class="btn btn-primary" style="background-color: black;">Ver caso</button>
-    </div>
-    <div class="col-6"><img src="..." alt="imagen referencia">
-  </div>
-</div>
-</div>
-</div>
+    <main class="container my-5">
+      <!-- Este div queda vacío: blogs.js lee el ?id= de la URL,
+           busca la noticia en blogsData y pinta todo aquí -->
+      <div id="detalle-blog"></div>
+    </main>
 
+    <footer class="bg-dark text-light mt-5 pt-4 pb-3">
+      <div class="container text-center">
+        <img src="img/shoopingcart.jpg" alt="Tienda virtual" width="40" height="40" class="rounded-circle mb-2">
+        <p class="mb-1 fw-bold">Tienda Virtual</p>
+        <p class="mb-2" style="font-size: 0.85rem; color: #aaa;">
+          Consolas, juegos y accesorios para todos los gamers.
+        </p>
+
+        <div class="mb-2">
+          <a href="#" class="text-light mx-2" title="Instagram">📷</a>
+          <a href="#" class="text-light mx-2" title="Twitter/X">🐦</a>
+          <a href="#" class="text-light mx-2" title="YouTube">▶️</a>
+        </div>
+
+        <hr style="border-color: #444;">
+
+        <p class="mb-0" style="font-size: 0.8rem; color: #888;">
+          &copy; 2026 Tienda Virtual. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/blogs-data.js"></script>
+    <script src="js/blogs.js"></script>
+</body>
 </body>
 </html>

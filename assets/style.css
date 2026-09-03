@@ -27,3 +27,7 @@ body{
   gap: 4rem;
   padding: 2rem;
 }
+.card-blogs img{
+  height: 160px;
+  object-fit: cover;
+}
