@@ -26,12 +26,12 @@ const blogsData = [
   {
     id: 3,
     titulo: "Juego indie que no te puedes perder este año",
-    resumen: "Una selección de títulos independientes con propuestas únicas.",
+    resumen: "Una recomencion de un juego que deberias jugar.",
     imagen: "nintendo/indie.jpg",
     fecha: "03 de septiembre del 2026",
     parrafos: [
       "Este año los estudios independientes siguen sorprendiendo con propuestas narrativas y jugables muy originales. Desde aventuras pixel-art hasta experiencias narrativas en primera persona, la escena indie demuestra que no se necesita un gran presupuesto para crear experiencias memorables.",
-      "En esta nota repasamos algunos de los títulos más comentados por la comunidad y la crítica especializada durante los últimos meses, ideales para quienes buscan algo distinto a los grandes lanzamientos AAA."
+      "En esta nota se hace la recomendacion del juego indie  MOUSE: P.I. For Hire es ideal para quienes buscan algo distinto a los grandes lanzamientos ."
     ]
   }
 ];
