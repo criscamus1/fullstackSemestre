@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: rgb(194, 189, 189); }
+        .error { color: rgb(76, 27, 27); }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid" style="background-color: white; border: black">
+    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">/Nombre Compañia\</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="usuarios.html">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="registrarusuario_admin.html">Nuevo Usuario</a>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="product.html">Productos</a>
+        </li>
+    </ul>
+    </div>
+<div class="nav-item">
+    <img src="img/campana.jpg" alt="campana" width="64px">
+  </div>
+</nav>
+<h1 style="width: 64; height: 64;">¡Hola Administrador!</h1>
+<div id="menu">
+    <table id="tablamenu">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Menu</th>
+                <th>Ir</th>
+            </tr>
+            <tr>
+              <th>1</th>
+              <th>Editar usuarios</th>
+              <th><a type="button" class="btn btn-primary" href="usuarios.html"> Ver usuarios</a></th>
+            </tr>
+            <tr>
+              <th>2</th>
+              <th>Editar Productos</th>
+              <th><a type="button" class="btn btn-primary" href="product.html"> Ver productos</a></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<script>
+
+</script>
+</body>
+</html>
