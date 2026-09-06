@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="estrellas">${producto.estrellas}</p>
         <p class="detalle-descripcion">${producto.descripcion}</p>
         <p class="precio-detalle">$${precioFormateado}</p>
-        <button class="btn-comprar" type="button">Comprar ahora</button>
+        <button class="btn-comprar" type="button" onclick="alert('${producto.nombre} añadido a la compra.')">Comprar ahora</button>
       </div>
     </div>
   `;

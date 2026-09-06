@@ -64,3 +64,33 @@ body{
   margin: 1rem auto;
   display: block;
 }
+.etiqueta-plataforma {
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+.detalle-descripcion {
+  color: #555;
+  margin: 1rem 0;
+}
+.precio-detalle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #c00;
+}
+
+.btn-comprar {
+  background-color: #c00;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-comprar:hover {
+  background-color: #a00;
+}
