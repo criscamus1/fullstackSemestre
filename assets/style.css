@@ -1,9 +1,26 @@
-body{
-    font-size: Georgia;
-    width: 14;
-    height: 14;
-    background-color: rgb(114, 113, 113);
+:root {
+  --bg: #14151f;
+  --bg-surface: #1c1e2b;
+  --bg-surface-2: #23253580;
+  --text: #f2f2f7;
+  --text-muted: #a3a3b8;
+  --accent: #8b5cf6;     
+  --accent-2: #22d3ee;    
+  --accent-warm: #ff5f7e; 
+  --border: #2c2e40;
 }
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent-2);
+}
+
+
 .estrellas {
   color: #f5b301;
 }
@@ -13,14 +30,34 @@ body{
     object-fit: cover;
  }
 .tarjeta {
-  background-color: white;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
-  color: #222;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  display: block; 
-} 
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  display: block;
+  padding-bottom: 0.5rem;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-2);
+  color: var(--text);
+}
+.tarjeta h3,
+.tarjeta .estrellas,
+.tarjeta .precio,
+.tarjeta .etiqueta-plataforma {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+.tarjeta .precio {
+  color: var(--accent-warm);
+  font-weight: bold;
+}
+
 .catalogo {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -28,12 +65,18 @@ body{
   padding: 2rem;
 }
 .card-blogs {
-  background-color: #fff;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
-.card-blogs img{
+.card-blogs:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.card-blogs img {
   width: 100%;
   height: 160px;
   object-fit: cover;
@@ -41,20 +84,33 @@ body{
 .contenido-blog {
   padding: 1rem;
 }
+.contenido-blog h5 {
+  color: var(--text);
+}
 .blog-link {
   text-decoration: none;
   color: inherit;
 }
 .fecha-blog {
   font-size: 0.8rem;
-  color: #777;
+  color: var(--text-muted);
 }
 .leer-blog {
   display: inline-block;
   margin-top: 0.5rem;
   font-weight: bold;
-  color: #0d6efd;
+  color: var(--accent-2);
 }
+.imagen-detalle {
+  width: 100%;
+  max-width: 700px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 1rem auto;
+  display: block;
+}
+
 .imagen-detalle {
   width: 100%;
   max-width: 700px;
@@ -93,4 +149,61 @@ body{
 }
 .btn-comprar:hover {
   background-color: #a00;
+}
+
+.navbar {
+  background-color: var(--bg-surface) !important;
+  border-bottom: 2px solid var(--accent);
+}
+.navbar-brand {
+  color: var(--text) !important;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar .nav-link {
+  color: var(--text-muted) !important;
+  transition: color 0.15s ease;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--accent-2) !important;
+}
+.navbar-toggler {
+  border-color: var(--accent) !important;
+}
+
+.btn-comprar {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.btn-comprar:hover {
+  background-color: #7c3aed;
+}
+.volver {
+  color: var(--accent-2);
+}
+table {
+  background-color: var(--bg-surface);
+  color: var(--text);
+}
+.form-control,
+.form-select {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-surface);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
 }
