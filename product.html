@@ -13,10 +13,12 @@
         th { background-color: rgb(194, 189, 189); }
         .error { color: rgb(76, 27, 27); }
     </style>
+        <link rel="stylesheet" href="assets/style.css">
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-   <div class="container-fluid" style="background-color: white; border: black">
+   <div class="container-fluid">
     <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">/Nombre Compañia\</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,13 +33,14 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="registrarusuario_admin.html">Nuevo Usuario</a>
+           </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Productos</a>
+          <a class="nav-link active" aria-current="page" href="product.html">Productos</a>
         </li>
     </ul>
     </div>
 <div class="nav-item">
-    <a class="nav-link active" aria-current="page" href="">
+    <a class="nav-link active" aria-current="page" href="#">
         <img src="img/campana.jpg" alt="campana" width="64px">
     </a>
   </div>
@@ -48,6 +51,7 @@
 <table id="tablaproductos">
 <thead>
         <tr> 
+           <th>ID</th>
             <th>Nombre</th>
             <th>Precio</th>
         </tr>
@@ -56,15 +60,21 @@
 </table>
 <script src="js/detalleProducto.js"></script>
 <script>
- const tbody = document.querySelector("#tablaproductostbody");
-    const listaProductos = JSON.parse(localStorage.getItem('productos')) || (typeof datosUsuarios !== "undefined" ? datosUsuarios : []);
+ const tbody = document.querySelector("#tablaproductos tbody");
+    let listaProductos = [];
+    try {
+        const guardados = JSON.parse(localStorage.getItem('productos'));
+        listaProductos = Array.isArray(guardados) && guardados.length > 0 ? guardados : productosData;
+    } catch (e) {
+        listaProductos = productosData;
+    }
 
     listaProductos.forEach((producto, index) => {
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${producto.id}</td>
             <td>${producto.nombre}</td>
-            <td><a href="editarProducto.html?id=${producto.id}&index=${index}&email=${encodeURIComponent(producto.precio)}">${producto.precio}</a></td>
+            <td><a href="editarProducto.html?id=${producto.id}&index=${index}">${producto.precio}</a></td>
         `;
         tbody.appendChild(fila);
     });

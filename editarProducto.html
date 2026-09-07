@@ -13,11 +13,12 @@
         th { background-color: rgb(194, 189, 189); }
         .error { color: rgb(76, 27, 27); }
     </style>
+      <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid" style="background-color: white; border: black">
-    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">/Nombre Compañia\</a>
+  <div class="container-fluid">
+    <a class="navbar-brand"><span class="logo-badge"><img src="img/shoopingcart.jpg" alt="" width="64" height="64"></span> VEG</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,7 +45,7 @@
       </ul>
     </div>
     <div class="nav-item">
-      <a class="nav-link active" aria-current="page" href="">
+      <a class="nav-link active" aria-current="page" href="#">
           <img src="img/campana.jpg" alt="campana" width="64px">
       </a>
     </div>
@@ -52,42 +53,39 @@
 </nav>
 
 <div class="container mt-4" style="max-width: 600px;">
-    <h2>Editar Usuario</h2>
+    <h2>Editar Producto</h2>
     <div id="alerta" class="alert d-none" role="alert"></div>
 
     <form id="formEditarUsuario" class="mt-3">
         <div class="mb-3">
-            <label for="idUsuario" class="form-label">ID</label>
-            <input type="text" class="form-control" id="idUsuario" readonly disabled>
+            <label for="idProducto" class="form-label">ID</label>
+            <input type="text" class="form-control" id="idProducto" readonly disabled>
         </div>
         <div class="mb-3">
-            <label for="nombreUsuario" class="form-label">Nombre Completo</label>
-            <input type="text" class="form-control" id="nombreUsuario" required>
+            <label for="nombreProducto" class="form-label">Nombre </label>
+            <input type="text" class="form-control" id="nombreProducto" required>
         </div>
         <div class="mb-3">
-            <label for="emailUsuario" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="emailUsuario" required>
+            <label for="precioProducto" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precioProducto" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        <a href="usuarios.html" class="btn btn-secondary ms-2">Volver</a>
+        <a href="product.html" class="btn btn-secondary ms-2">Volver</a>
     </form>
 </div>
 <script src="js/detalleProducto.js"></script>
 <script>
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
-    const productName = params.get('nombre');
-    const productIndex = params.get('index');
+    const productIndexParam = params.get('index');
 
-    let productosData = JSON.parse(localStorage.getItem('productos')) || (typeof datosProductos !== "undefined" ? [...datosProductos] : []);
+    const listaProductos = JSON.parse(localStorage.getItem('productos')) || [...productosData];
 
-    let productoIndex = -1;
-    if (productIndex !== null && productosData[productIndex]) {
-        productIndex = parseInt(productIndex);
-    } else if (productName) {
-        productIndex = productosData.findIndex(p=> p.name === productName);
+    let productIndex = -1;
+    if (productIndexParam !== null && listaProductos[productIndexParam]) {
+        productIndex = parseInt(productIndexParam);
     } else if (productId) {
-        productIndex = productosData.findIndex(p => p.id == productId);
+        productIndex = listaProductos.findIndex(p => p.id == productId);
     }
 
     const inputId = document.getElementById('idProducto');
@@ -95,33 +93,33 @@
     const inputPrecio = document.getElementById('precioProducto');
     const alerta = document.getElementById('alerta');
 
-    if (productIndex !== -1 && productosData[productIndex]) {
-        const producto = productosData[productIndex];
+    if (productIndex !== -1 && listaProductos[productIndex]) {
+        const producto = listaProductos[productIndex];
         inputId.value = producto.id;
         inputNombre.value = producto.nombre;
         inputPrecio.value = producto.precio;
     } else {
         alerta.className = "alert alert-danger";
-        alerta.textContent = "Usuario no encontrado.";
+        alerta.textContent = "Producto no encontrado.";
         alerta.classList.remove("d-none");
         document.getElementById('formEditarProducto').style.display = 'none';
     }
 
-    document.getElementById('formEditarUsuario').addEventListener('submit', function(e) {
+    document.getElementById('formEditarProducto').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        if (usuarioIndex !== -1) {
-            productosData[productIndex].nombre = inputNombre.value.trim();
-            productosData[productIndex].precio = inputPrecio.value.trim();
+        if (productIndex !== -1) {
+            listaProductos[productIndex].nombre = inputNombre.value.trim();
+            listaProductos[productIndex].precio = Number(inputPrecio.value);
 
-            localStorage.setItem('productos', JSON.stringify(productosData));
+            localStorage.setItem('productos', JSON.stringify(listaProductos));
 
             alerta.className = "alert alert-success";
             alerta.textContent = "¡Producto actualizado con éxito! Redirigiendo...";
             alerta.classList.remove("d-none");
 
             setTimeout(() => {
-                window.location.href = "administrador.html";
+                window.location.href = "product.html";
             }, 1200);
         }
     });
