@@ -58,26 +58,18 @@
     </thead>
     <tbody></tbody>
 </table>
-<script src="js/detalleProducto.js"></script>
+<script src="js/productosInfo.js"></script>
+<script src="js/carrito.js"></script>
 <script>
- const tbody = document.querySelector("#tablaproductos tbody");
-    let listaProductos = [];
-    try {
-        const guardados = JSON.parse(localStorage.getItem('productos'));
-        listaProductos = Array.isArray(guardados) && guardados.length > 0 ? guardados : productosData;
-    } catch (e) {
-        listaProductos = productosData;
-    }
-
-    listaProductos.forEach((producto, index) => {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${producto.id}</td>
-            <td>${producto.nombre}</td>
-            <td><a href="editarProducto.html?id=${producto.id}&index=${index}">${producto.precio}</a></td>
-        `;
-        tbody.appendChild(fila);
-    });
+    // Lee los productos (los guardados por el admin o los originales) y los muestra
+    document.querySelector("#tablaproductos tbody").innerHTML = todosLosProductos().map((p) => `
+        <tr>
+            <td>${p.id}</td>
+            <td>${p.nombre}</td>
+            <td>${pesos(p.precio)}</td>
+            <td>${stockDe(p.id)}</td>
+            <td><a href="editarProducto.html?id=${p.id}">Editar</a></td>
+        </tr>`).join("");
 </script>
 </body>
 </html>

@@ -1,44 +1,67 @@
-const productosData = [
-  { id: 1,  nombre: "Crimson Desert", plataforma: "PC/Consola", precio: 34990, estrellas: "★★★★⯨", imagen: "steam/crimson.jpg", descripcion: "RPG de mundo abierto ambientado en un continente en guerra." },
-  { id: 2,  nombre: "EA Sports FC 27", plataforma: "PC/Consola", precio: 48990, estrellas: "★★★★☆", imagen: "steam/fifa.jpg", descripcion: "El simulador de fútbol más popular, con clubes y ligas oficiales." },
-  { id: 3,  nombre: "Project Zomboid", plataforma: "PC", precio: 9990, estrellas: "★★★★⯨", imagen: "steam/project.jpg", descripcion: "Survival de zombies exigente, ideal para jugar en cooperativo." },
-  { id: 4,  nombre: "Raft: The Final Chapter", plataforma: "PC/Consola", precio: 12990, estrellas: "★★★★⯨", imagen: "steam/raft.jpg", descripcion: "Sobrevive a la deriva construyendo tu balsa en altamar." },
-  { id: 5,  nombre: "Terraria", plataforma: "PC/Consola", precio: 9990, estrellas: "★★★★★", imagen: "steam/terraria.jpg", descripcion: "Aventura y construcción en un mundo 2D generado aleatoriamente." },
-  { id: 6,  nombre: "Lies of P: Complete Edition", plataforma: "PC/Consola", precio: 39990, estrellas: "★★★★⯨", imagen: "nintendo/lies.jpg", descripcion: "Souls-like oscuro inspirado en la historia de Pinocho." },
-  { id: 7,  nombre: "Final Fantasy X | X-2 HD Remaster", plataforma: "Nintendo/Consola", precio: 39990, estrellas: "★★★★☆", imagen: "nintendo/final.jpg", descripcion: "Dos clásicos JRPG remasterizados en alta definición." },
-  { id: 8,  nombre: "Super Mario Bros. Wonder", plataforma: "Consola", precio: 54990, estrellas: "★★★★★", imagen: "nintendo/mario.jpg", descripcion: "Plataformas 2D con las sorprendentes flores maravilla." },
-  { id: 9,  nombre: "Pokémon Pokopia", plataforma: "Nintendo", precio: 49990, estrellas: "★★★★☆", imagen: "nintendo/pokopia.jpg", descripcion: "Cultiva y convive con tus Pokémon en tu propio pueblo." },
-  { id: 10, nombre: "Yoshi and the Mysterious Book", plataforma: "Nintendo", precio: 54990, estrellas: "★★★★⯨", imagen: "nintendo/yoshi.jpg", descripcion: "Plataformero tierno con un precioso estilo hecho a mano." },
-  { id: 11, nombre: "ELDEN RING Tarnished Edition", plataforma: "PC/Consola", precio: 34990, estrellas: "★★★★⯨", imagen: "nintendo/elden.jpg", descripcion: "Un vasto mundo de fantasía oscura creado junto a George R. R. Martin." },
-  { id: 12, nombre: "Resident Evil Requiem", plataforma: "PC/Consola", precio: 44990, estrellas: "★★★★⯨", imagen: "nintendo/re9.jpg", descripcion: "La nueva entrega de terror y survival horror de Capcom." }
-];
-document.addEventListener("DOMContentLoaded", () => {
-  const contenedor = document.getElementById("detalle-producto");
-  if (!contenedor) return; // esta página no tiene el div de detalle, no hace nada
+const cont = document.getElementById("detalle-producto");
+const p = buscar(new URLSearchParams(location.search).get("id"));   // busca el juego por su id
 
-  const params = new URLSearchParams(window.location.search);
-  const id = Number(params.get("id"));
-  const producto = productosData.find((p) => p.id === id);
+if (!p) {
+  cont.innerHTML = "<p>No se encontró el producto solicitado.</p>";
+} else {
+  // Hay una sola foto por juego, así que las 4 miniaturas son "vistas" (zoom) de ella: clases v0..v3 en style.css
+  const miniaturas = [0, 1, 2, 3].map((n) => `<button class="miniatura" data-n="${n}"><img src="${p.imagen}" class="v${n}"></button>`).join("");
+  const trailer = p.video
+    ? `<button class="btn-secundario" id="btn-trailer">▶ Ver tráiler</button>`
+    : `<a class="link-trailer" target="_blank" href="https://www.youtube.com/results?search_query=${encodeURIComponent(p.nombre + " trailer")}">▶ Buscar tráiler en YouTube</a>`;
 
-  if (!producto) {
-    contenedor.innerHTML = `<p>No se encontró el producto solicitado.</p>`;
-    return;
-  }
-  const precioFormateado = producto.precio.toLocaleString("es-CL");
-
-  contenedor.innerHTML = `
+  cont.innerHTML = `
+    <h2 class="detalle-titulo">${p.nombre}</h2>
+    <div class="detalle-sub"><span class="etiqueta-plataforma">${p.plataforma}</span> <span class="estrellas">${p.estrellas}</span></div>
     <div class="detalle-grid">
-      <div class="detalle-imagen">
-        <img src="${producto.imagen}" alt="${producto.nombre}">
+      <div>
+        <div class="galeria-principal"><div id="visor"></div></div>
+        <div class="miniaturas">${miniaturas}</div>
+        ${trailer}
       </div>
-      <div class="detalle-info">
-        <span class="etiqueta-plataforma">${producto.plataforma}</span>
-        <h2>${producto.nombre}</h2>
-        <p class="estrellas">${producto.estrellas}</p>
-        <p class="detalle-descripcion">${producto.descripcion}</p>
-        <p class="precio-detalle">$${precioFormateado}</p>
-        <button class="btn-comprar" type="button" onclick="alert('${producto.nombre} añadido a la compra.')">Comprar ahora</button>
+      <div>
+        <p class="detalle-descripcion">${p.descripcion}</p>
+        <div class="generos">${(p.generos || []).map((g) => `<span class="genero">${g}</span>`).join("")}</div>
+        <div class="caja-compra">
+          <p class="precio-detalle">${pesos(p.precio)}</p>
+          <p id="stock-info"></p>
+          <button id="btn-agregar" class="btn-comprar">Añadir al carrito</button>
+          <button id="btn-comprar-ahora" class="btn-secundario">Comprar ahora</button>
+          <p id="mensaje-carrito" class="mensaje-carrito"></p>
+        </div>
       </div>
     </div>
-  `;
-});
+`;
+
+  // Fotos: al hacer clic en una miniatura se cambia la foto grande
+  const visor = document.getElementById("visor");
+  function verFoto(n) {
+    visor.innerHTML = `<img src="${p.imagen}" class="v${n}">`;
+    document.querySelectorAll(".miniatura").forEach((m, i) => m.classList.toggle("activa", i === n));
+  }
+  verFoto(0);
+  document.querySelectorAll(".miniatura").forEach((m) => (m.onclick = () => verFoto(Number(m.dataset.n))));
+
+  // Tráiler: reemplaza la foto grande por el video de YouTube
+  if (p.video) {
+    document.getElementById("btn-trailer").onclick = () => {
+      visor.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.video}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    };
+  }
+
+  // Stock y compra
+  const botones = [document.getElementById("btn-agregar"), document.getElementById("btn-comprar-ahora")];
+  function mostrarStock() {
+    document.getElementById("stock-info").innerHTML = etiquetaStock(stockDe(p.id));
+    botones.forEach((b) => (b.disabled = stockDe(p.id) <= 0));
+  }
+  mostrarStock();
+  botones[0].onclick = () => {
+    const ok = cambiar(p.id, 1);                      // descuenta 1 de stock
+    const msg = document.getElementById("mensaje-carrito");
+    msg.textContent = ok ? p.nombre + " se agregó al carrito." : "No hay stock suficiente.";
+    msg.className = "mensaje-carrito " + (ok ? "ok" : "error");
+    mostrarStock();
+  };
+  botones[1].onclick = () => { if (cambiar(p.id, 1)) location.href = "carrito.html"; };
+}

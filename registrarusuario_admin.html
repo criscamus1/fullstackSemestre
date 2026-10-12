@@ -99,27 +99,24 @@
 <br>
    <button type="button"  class="btn btn-primary text-center" onclick="registrar()">Registrar</button>
 </form>
+<script src="js/usuarios.js"></script>
 <script>
+    function error(mensaje) { alert(mensaje); }
     function registrar() {
-        const correo= document.getElementById("correo").value;
-        const confcorreo= document.getElementById("confcorreo").value;
-        const contrasena= document.getElementById("contrasena").value;
-        const confcontrasena= document.getElementById("confcontrasena").value;
-        const nombre= document.getElementById("nombre").value;
-        const telefono= document.getElementById("telefono").value;
-        if(correo!==confcorreo){
-          error("El Correo no es el mismo")
-          return;
-        }
-        if(contrasena!==confcontrasena){
-          error("La contraseña no es la misma")
-          return;
-        }
-        console.log(correo===confcorreo)
-        console.log(contrasena===confcontrasena)
-        console.log(nombre)
-        console.log(telefono)
-        window.location.href="usuario.html";
+        const nombre = document.getElementById("nombre").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const contrasena = document.getElementById("contrasena").value;
+
+        if (correo !== document.getElementById("confcorreo").value.trim()) return error("El correo no es el mismo");
+        if (contrasena.length < 6) return error("La contraseña debe tener al menos 6 caracteres");
+        if (contrasena !== document.getElementById("confcontrasena").value) return error("La contraseña no es la misma");
+        const problema = validarUsuario(nombre, correo, 0);
+        if (problema) return error(problema);
+
+        const lista = todosLosUsuarios();
+        const id = Math.max(0, ...lista.map((u) => u.id)) + 1;
+        guardarUsuarios([...lista, { id: id, nombre: nombre, email: correo }]);
+        location.href = "usuarios.html";
     }
 </script>
 </body>

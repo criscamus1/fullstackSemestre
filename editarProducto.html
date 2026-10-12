@@ -66,53 +66,46 @@
 </div>
 <script src="js/productosInfo.js"></script>
 <script>
-    const params = new URLSearchParams(window.location.search);
-    const productId = params.get('id');
-    const productIndexParam = params.get('index');
+    // 1) Buscar el producto por su id (viene en la URL: editarProducto.html?id=3)
+    const id = new URLSearchParams(location.search).get("id");
+    const producto = buscar(id);
+    const alerta = document.getElementById("alerta");
+    const form = document.getElementById("formEditarProducto");
 
-    const listaProductos = JSON.parse(localStorage.getItem('productos')) || [...productosData];
-
-    let productIndex = -1;
-    if (productIndexParam !== null && listaProductos[productIndexParam]) {
-        productIndex = parseInt(productIndexParam);
-    } else if (productId) {
-        productIndex = listaProductos.findIndex(p => p.id == productId);
+    function mensaje(texto, tipo) {
+        alerta.className = "alert alert-" + tipo;
+        alerta.textContent = texto;
     }
 
-    const inputId = document.getElementById('idProducto');
-    const inputNombre = document.getElementById('nombreProducto');
-    const inputPrecio = document.getElementById('precioProducto');
-    const alerta = document.getElementById('alerta');
-
-    if (productIndex !== -1 && listaProductos[productIndex]) {
-        const producto = listaProductos[productIndex];
-        inputId.value = producto.id;
-        inputNombre.value = producto.nombre;
-        inputPrecio.value = producto.precio;
+    if (!producto) {
+        mensaje("Producto no encontrado.", "danger");
+        form.style.display = "none";
     } else {
-        alerta.className = "alert alert-danger";
-        alerta.textContent = "Producto no encontrado.";
-        alerta.classList.remove("d-none");
-        document.getElementById('formEditarProducto').style.display = 'none';
+        // 2) Mostrar sus datos actuales en el formulario
+        document.getElementById("idProducto").value = producto.id;
+        document.getElementById("nombreProducto").value = producto.nombre;
+        document.getElementById("precioProducto").value = producto.precio;
+        document.getElementById("stockProducto").value = stockDe(producto.id);
     }
 
-    document.getElementById('formEditarProducto').addEventListener('submit', function(e) {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
+        const nombre = document.getElementById("nombreProducto").value.trim();
+        const precio = Number(document.getElementById("precioProducto").value);
+        const stock = Number(document.getElementById("stockProducto").value);
 
-        if (productIndex !== -1) {
-            listaProductos[productIndex].nombre = inputNombre.value.trim();
-            listaProductos[productIndex].precio = Number(inputPrecio.value);
+        // 3) Validar
+        if (nombre.length < 2) return mensaje("El nombre debe tener al menos 2 letras.", "danger");
+        if (!Number.isInteger(precio) || precio <= 0) return mensaje("El precio debe ser un número entero mayor a 0.", "danger");
+        if (!Number.isInteger(stock) || stock < 0) return mensaje("El stock debe ser un número entero (0 o más).", "danger");
 
-            localStorage.setItem('productos', JSON.stringify(listaProductos));
+        // 4) Guardar: se reemplaza SOLO el producto con ese id y se guarda toda la lista
+        const lista = todosLosProductos().map((p) => (p.id == producto.id ? { ...p, nombre: nombre, precio: precio } : p));
+        guardarProductos(lista);
+        guardarStock(producto.id, stock);
 
-            alerta.className = "alert alert-success";
-            alerta.textContent = "¡Producto actualizado con éxito! Redirigiendo...";
-            alerta.classList.remove("d-none");
-
-            setTimeout(() => {
-                window.location.href = "product.html";
-            }, 1200);
-        }
+        mensaje("¡Producto actualizado! Redirigiendo...", "success");
+        setTimeout(() => (location.href = "product.html"), 1000);
     });
 </script>
 </body>
