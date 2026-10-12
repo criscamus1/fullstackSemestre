@@ -4,11 +4,13 @@ const p = buscar(new URLSearchParams(location.search).get("id"));   // busca el 
 if (!p) {
   cont.innerHTML = "<p>No se encontró el producto solicitado.</p>";
 } else {
-  // Hay una sola foto por juego, así que las 4 miniaturas son "vistas" (zoom) de ella: clases v0..v3 en style.css
-  const miniaturas = [0, 1, 2, 3].map((n) => `<button class="miniatura" data-n="${n}"><img src="${p.imagen}" class="v${n}"></button>`).join("");
-  const trailer = p.video
-    ? `<button class="btn-secundario" id="btn-trailer">▶ Ver tráiler</button>`
-    : `<a class="link-trailer" target="_blank" href="https://www.youtube.com/results?search_query=${encodeURIComponent(p.nombre + " trailer")}">▶ Buscar tráiler en YouTube</a>`;
+  // Fotos: las de "galeria" (4 imágenes del juego). Si no tiene, se usan 4 vistas ampliadas de la portada (clases v0..v3).
+  const fotos = (p.galeria || [p.imagen, p.imagen, p.imagen, p.imagen]).map((src, n) => ({ src: src, clase: p.galeria ? "real" : "v" + n }));
+  // El tráiler va primero, como en Steam
+  const items = p.video ? [{ video: p.video, src: p.imagen, clase: "v0" }, ...fotos] : fotos;
+  const miniaturas = items.map((f, n) => `
+    <button class="miniatura" data-n="${n}"><img src="${f.src}" class="${f.clase}">${f.video ? '<span class="play">▶</span>' : ""}</button>`).join("");
+  const enlaceYT = p.video ? "watch?v=" + p.video : "results?search_query=" + encodeURIComponent(p.nombre + " trailer");
 
   cont.innerHTML = `
     <h2 class="detalle-titulo">${p.nombre}</h2>
@@ -33,21 +35,22 @@ if (!p) {
     </div>
 `;
 
-  // Fotos: al hacer clic en una miniatura se cambia la foto grande
+  // Foto grande: al hacer clic en una miniatura se cambia. Si es el tráiler, muestra un botón ▶ que lo reproduce.
   const visor = document.getElementById("visor");
-  function verFoto(n) {
-    visor.innerHTML = `<img src="${p.imagen}" class="v${n}">`;
+  function ver(n) {
+    const f = items[n];
+    visor.innerHTML = f.video
+      ? `<div class="portada-video"><img src="${f.src}"><button class="play-grande" id="btn-play">▶</button><span class="texto-trailer">Ver tráiler de ${p.nombre}</span></div>`
+      : `<img src="${f.src}" class="${f.clase}">`;
+    if (f.video) {
+      document.getElementById("btn-play").onclick = () => {
+        visor.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${f.video}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+      };
+    }
     document.querySelectorAll(".miniatura").forEach((m, i) => m.classList.toggle("activa", i === n));
   }
-  verFoto(0);
-  document.querySelectorAll(".miniatura").forEach((m) => (m.onclick = () => verFoto(Number(m.dataset.n))));
-
-  // Tráiler: reemplaza la foto grande por el video de YouTube
-  if (p.video) {
-    document.getElementById("btn-trailer").onclick = () => {
-      visor.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.video}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-    };
-  }
+  ver(0);
+  document.querySelectorAll(".miniatura").forEach((m) => (m.onclick = () => ver(Number(m.dataset.n))));
 
   // Stock y compra
   const botones = [document.getElementById("btn-agregar"), document.getElementById("btn-comprar-ahora")];

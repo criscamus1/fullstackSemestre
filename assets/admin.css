@@ -1,0 +1,87 @@
+/* ===== Panel de administrador (administrador.html) — tema oscuro, sin Bootstrap ===== */
+:root {
+  --bg: #14151f; --bg-surface: #1c1e2b; --bg-2: #232538; --text: #f2f2f7; --text-muted: #a3a3b8;
+  --accent: #8b5cf6; --accent-2: #22d3ee; --warm: #ff5f7e; --border: #2c2e40; --ok: #34d399; --warn: #fbbf24;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }   /* que nunca se vea blanco, ni al final de la página */
+body { margin: 0; background: var(--bg); color: var(--text); font-family: "Segoe UI", Arial, sans-serif; display: flex; min-height: 100vh; }
+a { color: var(--accent-2); }
+
+/* Menú lateral */
+.lateral { width: 220px; flex-shrink: 0; background: var(--bg-surface); border-right: 1px solid var(--border); padding: 1rem .8rem; position: sticky; top: 0; height: 100vh; }
+.marca { display: flex; align-items: center; gap: .6rem; font-weight: 700; margin-bottom: 1.2rem; }
+.marca img { width: 44px; height: 44px; filter: invert(1); mix-blend-mode: screen; }
+.lateral nav a { display: block; padding: .6rem .8rem; margin-bottom: .2rem; border-radius: 8px; color: var(--text-muted); text-decoration: none; }
+.lateral nav a:hover { background: var(--bg-2); color: var(--text); }
+.lateral nav a.activo { background: var(--accent); color: #fff; }
+.lateral .salir { margin-top: 1rem; font-size: .9rem; }
+
+/* Contenido */
+main { flex: 1; padding: 1.2rem 1.6rem 3rem; min-width: 0; }
+.barra-arriba { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: .9rem; }
+h1 { margin: .8rem 0 1rem; font-size: 1.6rem; }
+h2 { font-size: 1.1rem; margin: 1.4rem 0 .6rem; }
+
+/* Avisos */
+.aviso { padding: .6rem .9rem; border-radius: 8px; margin: 0 0 1rem; }
+.aviso.bien { background: #34d39922; color: var(--ok); border: 1px solid var(--ok); }
+.aviso.mal { background: #ff5f7e22; color: var(--warm); border: 1px solid var(--warm); }
+
+/* Tarjetas de números */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .8rem; }
+.kpi { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+.kpi span { color: var(--text-muted); font-size: .85rem; }
+.kpi strong { display: block; font-size: 1.3rem; margin-top: .3rem; overflow-wrap: anywhere; }
+.kpi.alerta strong { color: var(--warn); }
+
+/* Tablas */
+.tabla { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+th, td { padding: .6rem .8rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg-2); color: var(--text-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+tr:last-child td { border-bottom: 0; }
+td img { width: 52px; height: 36px; object-fit: cover; border-radius: 4px; vertical-align: middle; }
+.acciones { white-space: nowrap; }
+.vacio { color: var(--text-muted); padding: 1rem 0; }
+
+/* Etiquetas de estado */
+.chip { padding: .15rem .6rem; border-radius: 999px; font-size: .8rem; border: 1px solid currentColor; }
+.estado-Pendiente { color: var(--warn); } .estado-Enviada { color: var(--accent-2); }
+.estado-Entregada { color: var(--ok); } .estado-Cancelada { color: var(--warm); }
+.bajo { color: var(--warn); font-weight: 600; }
+
+/* Botones */
+button, .btn { font: inherit; cursor: pointer; border-radius: 8px; padding: .45rem .9rem; border: 1px solid var(--accent); background: var(--accent); color: #fff; text-decoration: none; display: inline-block; }
+button.sec { background: transparent; color: var(--accent-2); border-color: var(--accent-2); }
+button.peligro { background: transparent; color: var(--warm); border-color: var(--warm); }
+button.chico { padding: .25rem .6rem; font-size: .85rem; }
+button:hover { filter: brightness(1.15); }
+.fila-botones { display: flex; gap: .6rem; flex-wrap: wrap; margin: 0 0 1rem; }
+
+/* Formularios */
+.caja { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1.2rem; }
+.campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .8rem; margin-bottom: 1rem; }
+label { display: block; font-size: .85rem; color: var(--text-muted); }
+input, select, textarea { display: block; width: 100%; margin-top: .25rem; padding: .5rem .6rem; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 8px; font: inherit; color-scheme: dark; }
+input[readonly] { opacity: .6; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); }
+.error-form { color: var(--warm); min-height: 1.2em; margin: 0 0 .6rem; }
+.ancho { grid-column: 1 / -1; }
+
+/* Mensajes de clientes (Reportes) */
+.mensaje p { margin: 0 0 .5rem; }
+
+/* Celular: el menú pasa arriba */
+@media (max-width: 800px) {
+  body { flex-direction: column; }
+  .lateral { width: 100%; height: auto; position: static; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+  .marca { margin: 0 1rem 0 0; }
+  .lateral nav { display: flex; flex-wrap: wrap; gap: .2rem; }
+  .lateral nav a { margin: 0; padding: .4rem .6rem; }
+  main { padding: 1rem; }
+}
+
+/* Ajustes de tabla: id y fecha en una línea; el selector de estado se ve completo */
+td:first-child, td:nth-child(2) { white-space: nowrap; }
+td select { width: auto; min-width: 8.5rem; margin: 0; }

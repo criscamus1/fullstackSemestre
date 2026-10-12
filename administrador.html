@@ -13,59 +13,33 @@
         th { background-color: rgb(194, 189, 189); }
         .error { color: rgb(76, 27, 27); }
     </style>
-        <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/admin.css">
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid" style="background-color: white; border: black">
-    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">VEG</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Menu</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="usuarios.html">Usuarios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="registrarusuario_admin.html">Nuevo Usuario</a>
-          </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="product.html">Productos</a>
-        </li>
-    </ul>
-    </div>
-<div class="nav-item">
-    <img src="img/campana.jpg" alt="campana" width="64px">
-  </div>
-</nav>
-<h1 >¡Hola Administrador!</h1>
-<div id="menu">
-    <table id="tablamenu">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Menu</th>
-                <th>Ir</th>
-            </tr>
-            <tr>
-              <th>1</th>
-              <th>Editar usuarios</th>
-              <th><a type="button" class="btn btn-primary" href="usuarios.html"> Ver usuarios</a></th>
-            </tr>
-            <tr>
-              <th>2</th>
-              <th>Editar Productos</th>
-              <th><a type="button" class="btn btn-primary" href="product.html"> Ver productos</a></th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+  <aside class="lateral">
+    <div class="marca"><img src="img/shoopingcart.jpg" alt=""><span>VEG<br><small>Administrador</small></span></div>
+    <nav id="menu">
+      <a href="#dashboard" data-sec="dashboard">📊 Dashboard</a>
+      <a href="#ordenes" data-sec="ordenes">🧾 Órdenes</a>
+      <a href="#productos" data-sec="productos">🎮 Productos</a>
+      <a href="#categorias" data-sec="categorias">🏷️ Categorías</a>
+      <a href="#usuarios" data-sec="usuarios">👥 Usuarios</a>
+      <a href="#reportes" data-sec="reportes">📈 Reportes</a>
+      <a href="#perfil" data-sec="perfil">👤 Perfil</a>
+    </nav>
+    <a class="salir" href="index.html">← Volver a la tienda</a>
+  </aside>
 
+  <main>
+    <div class="barra-arriba"><span>¡Hola, <strong id="nombre-admin">Administrador</strong>!</span></div>
+    <div id="contenido"></div>
+  </main>
+
+  <script src="js/productosInfo.js"></script>
+  <script src="js/ordenesInfo.js"></script>
+  <script src="js/usuarios.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

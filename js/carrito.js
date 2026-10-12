@@ -8,6 +8,14 @@ function todosLosProductos() {
   const guardados = leer("productos", []);
   return guardados.length > 0 ? guardados : productosData;
 }
+function guardarProductos(lista) {
+  localStorage.setItem("productos", JSON.stringify(lista));
+}
+function guardarStock(id, unidades) {
+  const stocks = leer("stock", {});
+  stocks[id] = unidades;
+  localStorage.setItem("stock", JSON.stringify(stocks));
+}
 function buscar(id) {
   return todosLosProductos().find((p) => p.id == id);
 }
@@ -28,9 +36,7 @@ function cambiar(id, delta) {
   delta = Math.max(delta, -item.cantidad);
   item.cantidad += delta;
 
-  const stocks = leer("stock", {});
-  stocks[id] = stockDe(id) - delta;
-  localStorage.setItem("stock", JSON.stringify(stocks));
+  guardarStock(id, stockDe(id) - delta);
   localStorage.setItem("carrito", JSON.stringify(carrito.filter((i) => i.cantidad > 0)));
   contador();
   return true;
@@ -41,6 +47,24 @@ function vaciar() {
 function pagar() {             
   localStorage.setItem("carrito", "[]");
   contador();
+}
+
+// Órdenes: las de ejemplo (ordenesInfo.js) o las guardadas en localStorage
+function todasLasOrdenes() {
+  return leer("ordenes", ordenesData);
+}
+function totalOrden(o) {
+  return o.items.reduce((s, i) => s + i.precio * i.cantidad, 0);
+}
+// Guarda lo que hay en el carrito como una orden nueva (se llama justo antes de pagar)
+function guardarOrden(numero) {
+  const items = verCarrito().map((i) => {
+    const p = buscar(i.id);
+    return { id: p.id, nombre: p.nombre, precio: p.precio, cantidad: i.cantidad };
+  });
+  const lista = todasLasOrdenes();
+  lista.push({ id: numero, fecha: new Date().toISOString().slice(0, 10), cliente: "Cliente web", estado: "Pendiente", items: items });
+  localStorage.setItem("ordenes", JSON.stringify(lista));
 }
 
 function totalCarrito() {

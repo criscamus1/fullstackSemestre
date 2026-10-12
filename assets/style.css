@@ -355,3 +355,28 @@ th, td { padding: .6rem .8rem; }
 .link-trailer { display: inline-block; margin-top: .7rem; font-weight: 600; }
 
 .texto-trailer { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.2rem 1rem .8rem; text-align: center; font-weight: 700; background: linear-gradient(transparent, rgba(0,0,0,.85)); }
+.miniaturas { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.resumen-detalle { color: var(--text-muted); }
+
+/* Vistas de la misma foto (miniaturas y foto grande) */
+.v1 { object-position: 15% 20%; transform: scale(1.6); }
+.v2 { object-position: 85% 30%; transform: scale(1.6); }
+.v3 { object-position: 50% 90%; transform: scale(1.8); }
+.galeria-principal + .miniaturas + .btn-secundario, .galeria-principal + .miniaturas + .link-trailer { margin-top: .8rem; }
+
+/* Fotos reales de la galería: se ven completas (sin recortar) en la foto grande */
+#visor img.real { object-fit: contain; background: #000; }
+
+/* ===== Administrador y formularios: todo oscuro (nada blanco) ===== */
+:root, [data-bs-theme=light] {
+  color-scheme: dark;
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--text);
+  --bs-border-color: var(--border);
+  --bs-secondary-bg: #23253a;
+  --bs-tertiary-bg: var(--bg-surface);
+  --bs-secondary-color: var(--text-muted);
+}
+.navbar img { filter: invert(1); mix-blend-mode: screen; }   /* campana y logo: fondo blanco -> transparente */
+.form-control:disabled, .form-control[readonly] { background-color: #23253a; color: var(--text-muted); opacity: 1; }
+.error { color: var(--accent-warm); }

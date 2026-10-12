@@ -1,24 +1,23 @@
-// ===== Dibuja las partes que cambian: carrito, stock del catálogo y destacados =====
+function tarjeta(p) {
+  return `
+    <a href="detalle_producto.html?id=${p.id}" class="tarjeta">
+      <img src="${p.imagen}" alt="${p.nombre}">
+      <span class="etiqueta-plataforma">${p.plataforma}</span>
+      <h3>${p.nombre}</h3>
+      <p class="estrellas">${p.estrellas}</p>
+      <p class="precio">${pesos(p.precio)}</p>
+      <p class="stock-tag-wrap">${etiquetaStock(stockDe(p.id))}</p>
+    </a>`;
+}
 
-// 1) Stock en cada tarjeta de productos.html
-document.querySelectorAll(".stock-tag").forEach((tag) => {
-  const id = new URL(tag.closest("a").href).searchParams.get("id");
-  tag.innerHTML = etiquetaStock(stockDe(id));
-});
+// 1) Catálogo de productos.html: todos los juegos (si el admin cambia algo, se ve aquí)
+const catalogo = document.getElementById("catalogo");
+if (catalogo) catalogo.innerHTML = todosLosProductos().map(tarjeta).join("");
 
 // 2) Juegos destacados en index.html (4 con stock)
 const destacados = document.getElementById("destacados");
 if (destacados) {
-  destacados.innerHTML = todosLosProductos()
-    .filter((p) => stockDe(p.id) > 0).slice(0, 4)
-    .map((p) => `
-      <a href="detalle_producto.html?id=${p.id}" class="tarjeta">
-        <img src="${p.imagen}" alt="${p.nombre}">
-        <span class="etiqueta-plataforma">${p.plataforma}</span>
-        <h3>${p.nombre}</h3>
-        <p class="estrellas">${p.estrellas}</p>
-        <p class="precio">${pesos(p.precio)}</p>
-      </a>`).join("");
+  destacados.innerHTML = todosLosProductos().filter((p) => stockDe(p.id) > 0).slice(0, 4).map(tarjeta).join("");
 }
 
 // 3) Página carrito.html
@@ -68,6 +67,7 @@ if (zona) {
     else if (b.id === "btn-pagar") {
       const orden = "TV-" + Math.floor(100000 + Math.random() * 900000);
       const total = totalCarrito();
+      guardarOrden(orden);
       pagar();
       zona.innerHTML = `<div class="compra-exitosa"><h3>¡Compra realizada con éxito!</h3><p>Número de orden: <strong>${orden}</strong></p><p class="total">Total pagado: ${pesos(total)}</p><a href="productos.html" class="btn-comprar">Seguir comprando</a></div>`;
       return;
