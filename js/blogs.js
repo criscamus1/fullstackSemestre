@@ -21,7 +21,6 @@ if (grillaBlogs) {
         `;
     });
 }
-// Mostrar una noticia individual en blogs_sesion.html
 const detalleBlog = document.getElementById("detalle-blog");
 
 if (detalleBlog) {

@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">Tienda virtual</a>
+    <a class="navbar-brand"><img src="img/shoopingcart.jpg" alt="" width="64" height="64">VEG</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,23 +21,26 @@
           <a class="nav-link active" aria-current="page" href="index.html">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Productos</a>
+          <a class="nav-link active" aria-current="page" href="productos.html">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Nosostros</a>
+          <a class="nav-link active" aria-current="page" href="nosotros.html">Nosostros</a>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="blogs.html">Blogs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="contactos.html">Contactos</a>
         </li>
+        <li class="nav-item"><a class="nav-link" href="carrito.html">🛒 Carrito <span id="contador-carrito" class="badge-carrito">0</span></a>
+        </li>
+        </ul>
     </div>
   </div>
 </nav>
 <div class="nav-item">
     <a type="button" class="btn btn-primary" aria-current="page" href="iniciarSesion.html">¿Ya tienes un usuario?</a>
   </div>
-<h1 class="container text-center">Registrar en /Inserte nombre de empresa\</h1>
+<h1 class="container text-center">Registrar en VEG</h1>
 <form class="container text-center">
   <div class="mb-3">
     <label for="nombre" class="form-label">Nombre Completo</label>
@@ -74,17 +77,9 @@
   <option value="3">Antofagasta</option>
   <option value="4">Araucanía</option>
   <option value="5">Ñuble</option>
-  <option value="6"></option>
-  <option value="7"></option>
-  <option value="8"></option>
-  <option value="9"></option>
-  <option value="10"></option>
-  <option value="11"></option>
-  <option value="12"></option>
-  <option value="13"></option>
-  <option value="14"></option>
-  <option value="15"></option>
-  <option value="16"></option>
+  <option value="6">Los Lagos</option>
+  <option value="7">Los Rios</option>
+  <option value="8">No esta en la lista</option>
 </select>
 </div>
 <div class="col 6">
@@ -122,5 +117,7 @@
         window.location.href="inicio.html";
     }
 </script>
+<script src="js/productosInfo.js"></script>
+<script src="js/carrito.js"></script>
 </body>
 </html>

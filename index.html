@@ -33,6 +33,8 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="contactos.html">Contactos</a>
         </li>
+        <li class="nav-item"><a class="nav-link" href="carrito.html">🛒 Carrito <span id="contador-carrito" class="badge-carrito">0</span></a>
+        </li>        
     </div>
   </div>
   <div class="nav-item">
@@ -44,38 +46,67 @@
 </nav>
 <!--Termino menú-->
 <div class="hero-banner text-center">
-  <h1>Tu tienda de videojuegos</h1>
-  <p>Consolas, catálogo Steam y Nintendo, todo en un solo lugar.</p>
+    <h1>Tu tienda de <span class="grad">videojuegos</span></h1>
+  <p>Encuentro el catálogo de juegos e blogs y todo en un solo lugar.</p>
   <a href="productos.html" class="btn btn-primary mt-2">Explorar catálogo</a>
+  <a href="blogs.html" class="btn-secundario">Ver noticias</a>
+
 </div>
 
 
-<!--Inicio Íconos-->
-    <div class="container text-center">
-    <div class="row row-cols-1 row-cols-md-2 justify-content-center g-4">
-    <div class="col">
-        <div class="card text-center h-100">
-            <img src="img/shopping-cart.jpg" class="card-img-top" alt="tienda" style="background-color: gray;">
-                <div class="card-body">
-                    <h5 class="card-title">Tienda Online</h5>
-                    <p class="card-text">Revisa nuestra tienda</p>
-                    <a target="_blank" href="productos.html" class="btn btn-primary">Ver productos</a>
-                </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card text-center h-100">
-            <img src="img/blogsLogo.jpg" class="card-img-top" alt="blogs" style="border: white;">
-                <div class="card-body">
-                    <h5 class="card-title">Blogs</h5>
-                    <p class="card-text">Mira nuestros blogs</p>
-                    <a target="_blank" href="blogs.html" class="btn btn-primary">Mostrar Blogs</a>
-                </div>
-        </div>
-    </div>
-    </div>
-    </div>
-<!--Término Íconos-->
+<!--Inicio Accesos-->
+<section class="seccion">
+  <h2 class="titulo-seccion">¿A dónde quieres ir?</h2>
+  <div class="accesos">
+    <a href="productos.html" class="acceso">
+      <span class="acceso-icono">🛍️</span>
+      <h3>Tienda</h3>
+      <p>Catálogo de juegos Steam y Nintendo con stock en vivo.</p>
+      <span class="acceso-link">Ver productos →</span>
+    </a>
+    <a href="blogs.html" class="acceso">
+      <span class="acceso-icono">📰</span>
+      <h3>Blogs</h3>
+      <p>Noticias, lanzamientos e información de consolas.</p>
+      <span class="acceso-link">Leer blogs →</span>
+    </a>
+    <a href="carrito.html" class="acceso">
+      <span class="acceso-icono">🛒</span>
+      <h3>Mi carrito</h3>
+      <p>Revisa lo que llevas y finaliza tu compra.</p>
+      <span class="acceso-link">Ir al carrito →</span>
+    </a>
+    <a href="nosotros.html" class="acceso">
+      <span class="acceso-icono">👾</span>
+      <h3>Nosotros</h3>
+      <p>Conoce quiénes somos y qué nos apasiona.</p>
+      <span class="acceso-link">Conócenos →</span>
+    </a>
+    <a href="contactos.html" class="acceso">
+      <span class="acceso-icono">💬</span>
+      <h3>Contacto</h3>
+      <p>¿Dudas o consultas? Escríbenos.</p>
+      <span class="acceso-link">Contactar →</span>
+    </a>
+    <a href="iniciarSesion.html" class="acceso">
+      <span class="acceso-icono">🔐</span>
+      <h3>Mi cuenta</h3>
+      <p>Inicia sesión o regístrate en la tienda.</p>
+      <span class="acceso-link">Entrar →</span>
+    </a>
+  </div>
+</section>
 
+<section class="beneficios">
+  <div><span>⚡</span><strong>Stock en vivo</strong><small>Siempre veras cuántas unidades quedan</small></div>
+  <div><span>🔒</span><strong>Compras simple</strong><small>Carrito claro y pago en un paso</small></div>
+  <div><span>🎁</span><strong>Gran variedad</strong><small>Para PC y Nintendo, incluso más</small></div>
+</section>
+<footer class="pie">© 2026 Tienda Virtual</footer>
+
+<!--Termino Accesos-->
+<script src="js/productosInfo.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/tienda.js"></script>
 </body>
 </html>
